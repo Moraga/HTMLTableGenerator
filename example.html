@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>HTML Table Generator</title>
+<style>
+td {background:#efefef; min-width:80px; height:22px;}
+tr td:last-child {background:none;}
+tr:first-child td:last-child {background:#666;}
+
+tr:last-child td {background:none;}
+tr:last-child td:first-child {background:#666;}
+
+.b1:after, .b2:after {content:" "; display:block; opacity:.5; width:20px; height:20px;}
+.b1:checked:after, .b2:checked:after {opacity:1;}
+
+.b1:after {background:red;}
+.b2:after {background:blue;}
+</style>
+</head>
+<body>
+
+<h1>New table</h1>
+<form id="test1"></form>
+
+<h1>Feeding table</h1>
+<form id="test2"></form>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="tbl.js"></script>
+<script>
+
+// first table
+var a = new tbl('#test1');
+
+// second table
+var b = new tbl('#test2');
+
+// import
+b.import('['+
+	'[":B1", ":B2", ":B2", ":B1"], '+
+	'["ABC", "BCD", "CDE", "DFG"], '+
+	'["X12", "Y23", "Z34", "W45"], '+
+	'[":C1", ":C2", ":C2", ":C1"], '+
+	'["X1A", "Y2A", "Z3A", "W4A"]  '+
+']');
+
+// and export
+// check your console
+// JSON
+console.log(b.toJSON());
+// CSV
+console.log(b.toCSV());
+
+</script>
+</body>
+</html>
