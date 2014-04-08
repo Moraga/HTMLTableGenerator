@@ -1,9 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype>
+<html>
 <head>
 <meta charset="utf-8"/>
 <title>HTML Table Generator</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="tbl.js"></script>
 <style>
+
 td {background:#efefef; min-width:80px; height:22px;}
 tr td:last-child {background:none;}
 tr:first-child td:last-child {background:#666;}
@@ -16,41 +19,22 @@ tr:last-child td:first-child {background:#666;}
 
 .b1:after {background:red;}
 .b2:after {background:blue;}
+
 </style>
 </head>
 <body>
 
-<h1>New table</h1>
-<form id="test1"></form>
+<div id="tbl"></div>
 
-<h1>Feeding table</h1>
-<form id="test2"></form>
+<input type="button" value="Export JSON" onclick="$('#io').val(table.export.json())"/>
+<input type="button" value="Export CSV" onclick="$('#io').val(table.export.csv())"/>
+<input type="button" value="Import JSON" onclick="table.import.json($('#io').val())"/>
+<textarea id="io" style="width:100%; height:70px">[["A1", "B1", "C1"],["A2", "B2", "C2"]]</textarea>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="tbl.js"></script>
 <script>
 
-// first table
-var a = new tbl('#test1');
-
-// second table
-var b = new tbl('#test2');
-
-// import
-b.import('['+
-	'[":B1", ":B2", ":B2", ":B1"], '+
-	'["ABC", "BCD", "CDE", "DFG"], '+
-	'["X12", "Y23", "Z34", "W45"], '+
-	'[":C1", ":C2", ":C2", ":C1"], '+
-	'["X1A", "Y2A", "Z3A", "W4A"]  '+
-']');
-
-// and export
-// check your console
-// JSON
-console.log(b.toJSON());
-// CSV
-console.log(b.toCSV());
+// init
+var table = new tbl('#tbl');
 
 </script>
 </body>
